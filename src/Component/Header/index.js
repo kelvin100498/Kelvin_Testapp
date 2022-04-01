@@ -7,7 +7,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import COLOR from '../../Config/color.js';
 import {navigate} from '../../Helper/navigate.js';
 
-const Header = ({Submit}) => {
+const Header = ({Submit, HeaderText = 'Add Contact'}) => {
   return (
     <View style={styles.ContainerLeft}>
       <TouchableOpacity
@@ -20,7 +20,7 @@ const Header = ({Submit}) => {
       </TouchableOpacity>
       <View>
         <Poppins size={18} fontWeight="bold">
-          Add Contact
+          {HeaderText}
         </Poppins>
       </View>
       <TouchableOpacity onPress={Submit}>

@@ -1,12 +1,6 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  TouchableOpacity,
-} from 'react-native';
+import {StyleSheet, SafeAreaView} from 'react-native';
 import React, {useState} from 'react';
-import Poppins from '../../Component/Poppins/index.js';
+
 import {useDispatch} from 'react-redux';
 import CardTextInput from '../../Component/CardTextInput/index.js';
 import Header from '../../Component/Header/index.js';
