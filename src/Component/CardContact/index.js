@@ -9,6 +9,7 @@ import {navigate} from '../../Helper/navigate';
 
 const CardKontak = ({data, disable}) => {
   const dispatch = useDispatch();
+
   const SelectContact = id => {
     dispatch({type: 'SELECTED_ID_CONTACT', payload: id});
     navigate('DetailScreen');

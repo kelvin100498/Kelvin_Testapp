@@ -24,7 +24,62 @@ const CardTextInput = ({
   keyboardType1 = 'default',
   keyboardType2 = 'default',
   keyboardType3 = 'default',
+  alertMessage,
+  setAlertMesage,
 }) => {
+  //firstName Validation
+  const firstNameValidation = () => {
+    if (!value1) {
+      setAlertMesage({
+        ...alertMessage,
+        firstName: 'First name must be field !',
+      });
+    } else if (value1 && value1.length < 3) {
+      setAlertMesage({
+        ...alertMessage,
+        firstName: 'Must be at least 3 characters !',
+      });
+    } else if (value1 && value1.length >= 3) {
+      setAlertMesage({
+        ...alertMessage,
+        firstName: '',
+      });
+    }
+  };
+  const LastNameValidation = () => {
+    if (!value2) {
+      setAlertMesage({
+        ...alertMessage,
+        LastName: 'Last name must be field !',
+      });
+    } else if (value2 && value2.length < 3) {
+      setAlertMesage({
+        ...alertMessage,
+        LastName: 'Must be at least 3 characters',
+      });
+    } else if (value2 && value2.length >= 3) {
+      setAlertMesage({
+        ...alertMessage,
+        LastName: '',
+      });
+    }
+  };
+
+  //age Validation
+  const ageValidation = () => {
+    if (!value3) {
+      setAlertMesage({
+        ...alertMessage,
+        age: 'Age must be field !',
+      });
+    } else {
+      setAlertMesage({
+        ...alertMessage,
+        age: '',
+      });
+    }
+  };
+
   return (
     <View>
       <View>
@@ -37,8 +92,17 @@ const CardTextInput = ({
             placeholderTextColor={COLOR.light}
             onChangeText={onChangeText1}
             color={COLOR.white}
+            onBlur={firstNameValidation}
           />
         </View>
+        <View style={{marginLeft: moderateScale(8)}}>
+          {alertMessage.firstName ? (
+            <Text style={{fontSize: 11, color: 'red'}}>
+              {alertMessage.firstName}
+            </Text>
+          ) : null}
+        </View>
+
         <View>
           <View style={styles.containerTextInput}>
             <TextInput
@@ -49,9 +113,18 @@ const CardTextInput = ({
               placeholderTextColor={COLOR.light}
               onChangeText={onChangeText2}
               color={COLOR.white}
+              onBlur={LastNameValidation}
             />
           </View>
         </View>
+        <View style={{marginLeft: moderateScale(8)}}>
+          {alertMessage.LastName ? (
+            <Text style={{fontSize: 11, color: 'red'}}>
+              {alertMessage.LastName}
+            </Text>
+          ) : null}
+        </View>
+
         <View>
           <View style={styles.containerTextInput}>
             <TextInput
@@ -62,8 +135,14 @@ const CardTextInput = ({
               placeholderTextColor={COLOR.light}
               onChangeText={onChangeText3}
               color={COLOR.white}
+              onBlur={ageValidation}
             />
           </View>
+        </View>
+        <View style={{marginLeft: moderateScale(8)}}>
+          {alertMessage.age ? (
+            <Text style={{fontSize: 11, color: 'red'}}>{alertMessage.age}</Text>
+          ) : null}
         </View>
       </View>
     </View>

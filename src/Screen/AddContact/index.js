@@ -13,10 +13,18 @@ import Header from '../../Component/Header/index.js';
 
 const AddContact = () => {
   const dispatch = useDispatch();
+
   //text Input
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [age, setAge] = useState('');
+
+  const [alertMessage, setAlertMesage] = useState({
+    firstName: '',
+    lastName: '',
+    age: '',
+  });
+
   const [photo, setphoto] = useState(
     'https://res.cloudinary.com/ddvobptro/image/upload/v1642494701/siluet_wni7t4.png',
   );
@@ -38,10 +46,12 @@ const AddContact = () => {
         onChangeText1={text => setFirstName(text)}
         onChangeText2={text => setLastName(text)}
         onChangeText3={text => setAge(text)}
-        placeholder1="Nama Depan"
-        placeholder2="Nama Belakang"
-        placeholder3="Umur"
+        placeholder1=" First Name"
+        placeholder2=" Last Name"
+        placeholder3=" Age"
         keyboardType3="phone-pad"
+        alertMessage={alertMessage}
+        setAlertMesage={setAlertMesage}
       />
     </SafeAreaView>
   );
