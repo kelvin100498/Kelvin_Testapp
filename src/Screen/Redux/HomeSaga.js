@@ -99,7 +99,7 @@ export function* deleteContact(action) {
     const id = yield select(state => state.HomeReducer.selectedID);
     const res = yield apiDeleteContact(id);
     console.log(res, '1');
-    if (res.status == 200) {
+    if (res.status == 202) {
       yield put({type: 'GET_HOME'});
       navigate('Home');
       console.log('2');
