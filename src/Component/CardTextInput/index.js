@@ -38,6 +38,8 @@ const CardTextInput = ({
       });
     }
   };
+
+  //lastName Validation
   const LastNameValidation = () => {
     if (!value2) {
       setAlertMesage({
@@ -64,7 +66,12 @@ const CardTextInput = ({
         ...alertMessage,
         age: 'Age must be field !',
       });
-    } else {
+    } else if (value3 > 100) {
+      setAlertMesage({
+        ...alertMessage,
+        age: 'Max age 100 !',
+      });
+    } else if (value3 <= 100) {
       setAlertMesage({
         ...alertMessage,
         age: '',
@@ -141,7 +148,6 @@ const CardTextInput = ({
   );
 };
 
-//edit Profile
 export default CardTextInput;
 
 const styles = StyleSheet.create({

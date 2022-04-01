@@ -1,28 +1,7 @@
 import axios from 'axios';
-import DataForm from 'form-data';
 
 const baseUrl = 'https://simple-contact-crud.herokuapp.com/';
 axios.defaults.validateStatus = status => status <= 510;
-
-// export const apiGantiFoto = async (dataImage, token) => {
-//   const body = new DataForm();
-//   body.append('image', {
-//     uri: dataImage.uri,
-//     name: dataImage.fileName,
-//     type: dataImage.type,
-//   });
-//   const headers = new Headers();
-//   headers.append('authorization', `Bearer ${token}`);
-//   headers.append('Content-Type', 'multipart/form-data');
-//   const result = await fetch(baseUrl + 'profile/upload', {
-//     body,
-//     headers,
-//     method: 'POST',
-//   });
-//   console.log(result, 'ini result');
-
-//   return result.json();
-// };
 
 export const apiGetAllContact = () => {
   return axios({

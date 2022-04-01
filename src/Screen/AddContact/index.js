@@ -1,7 +1,8 @@
 import {StyleSheet, SafeAreaView} from 'react-native';
 import React, {useState} from 'react';
-
 import {useDispatch} from 'react-redux';
+
+//component
 import CardTextInput from '../../Component/CardTextInput/index.js';
 import Header from '../../Component/Header/index.js';
 import {navigate} from '../../Helper/navigate.js';

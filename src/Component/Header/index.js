@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import React from 'react';
 import Poppins from '../Poppins/index.js';
 import {moderateScale} from 'react-native-size-matters';

@@ -1,5 +1,5 @@
 import {put, takeLatest, select} from 'redux-saga/effects';
-import {ToastAndroid} from 'react-native';
+import {ToastAndroid, Alert} from 'react-native';
 import {
   apiGetAllContact,
   apiGetContactById,
@@ -11,133 +11,138 @@ import {navigate} from '../../Helper/navigate';
 
 //Get All Contact Saga
 export function* homeSaga(action) {
-  const TOASTFAILEDHOME = () => {
-    ToastAndroid.showWithGravity(
-      'Gagal, Terjadi Kesalahan Kontak',
-      ToastAndroid.SHORT,
-      ToastAndroid.CENTER,
-    );
-  };
   try {
     const res = yield apiGetAllContact();
     console.log(res, '1');
-    if (res.status == 200) {
+    if (res.status < 400) {
       console.log('2');
       yield put({type: 'CONTACTREDUCER', payload: res.data.data});
     } else {
-      TOASTFAILEDHOME();
+      ToastAndroid.showWithGravity(
+        res.data.message,
+        ToastAndroid.LONG,
+        ToastAndroid.CENTER,
+      );
     }
   } catch (e) {
     console.log('3');
     console.info('e', e);
-    TOASTFAILEDHOME();
+    ToastAndroid.showWithGravity(
+      res.data.message,
+      ToastAndroid.LONG,
+      ToastAndroid.CENTER,
+    );
   }
 }
 
 //Get Contact By Id Saga
 export function* byIdSaga(action) {
-  const TOASTFAILEDID = () => {
-    ToastAndroid.showWithGravity(
-      'Gagal, Terjadi Kesalahan ID',
-      ToastAndroid.SHORT,
-      ToastAndroid.CENTER,
-    );
-  };
   try {
     const id = yield select(state => state.HomeReducer.selectedID);
     const res = yield apiGetContactById(id);
     console.log(res, '1');
-    if (res.status == 200) {
+    if (res.status < 400) {
       console.log('2');
       yield put({type: 'SELECTED_CONTACT_BY_ID', payload: res.data.data});
     } else {
-      TOASTFAILEDID();
+      ToastAndroid.showWithGravity(
+        res.data.message,
+        ToastAndroid.LONG,
+        ToastAndroid.CENTER,
+      );
     }
   } catch (e) {
     console.log('3');
     console.info('e', e);
-    TOASTFAILEDID();
+    ToastAndroid.showWithGravity(
+      res.data.message,
+      ToastAndroid.LONG,
+      ToastAndroid.CENTER,
+    );
   }
 }
 
 //Save Contact Saga
 export function* addContact(action) {
-  const TOASTFAILEDCONTCACT = () => {
-    ToastAndroid.showWithGravity(
-      'Gagal, Terjadi Kesalahan Simpan Contact',
-      ToastAndroid.SHORT,
-      ToastAndroid.CENTER,
-    );
-  };
   try {
     const res = yield apiSaveContact(action.payload);
     console.log(res, '1');
-    if (res.status == 201) {
+    if (res.status < 400) {
       yield put({type: 'GET_HOME'});
       navigate('Home');
       console.log('2');
     } else {
-      TOASTFAILEDCONTCACT();
+      ToastAndroid.showWithGravity(
+        res.data.message,
+        ToastAndroid.LONG,
+        ToastAndroid.CENTER,
+      );
     }
   } catch (e) {
     console.log('3');
     console.info('e', e);
-    TOASTFAILEDCONTCACT();
+    ToastAndroid.showWithGravity(
+      res.data.message,
+      ToastAndroid.LONG,
+      ToastAndroid.CENTER,
+    );
   }
 }
 
 //Delete Contact Saga
 export function* deleteContact(action) {
-  const TOASTDELETECONTACT = () => {
-    ToastAndroid.showWithGravity(
-      'Gagal, Terjadi Kesalahan delete Contact',
-      ToastAndroid.SHORT,
-      ToastAndroid.CENTER,
-    );
-  };
   try {
     const id = yield select(state => state.HomeReducer.selectedID);
     const res = yield apiDeleteContact(id);
     console.log(res, '1');
-    if (res.status == 202) {
+    if (res.status < 400) {
       yield put({type: 'GET_HOME'});
       navigate('Home');
       console.log('2');
     } else {
-      TOASTDELETECONTACT();
+      ToastAndroid.showWithGravity(
+        res.data.message,
+        ToastAndroid.LONG,
+        ToastAndroid.CENTER,
+      );
     }
   } catch (e) {
     console.log('3');
     console.info('e', e);
-    TOASTDELETECONTACT();
+    ToastAndroid.showWithGravity(
+      res.data.message,
+      ToastAndroid.LONG,
+      ToastAndroid.CENTER,
+    );
   }
 }
 
 //Edit Contact Saga
 export function* editContact(action) {
-  const TOASTEDITCONTACTFAILED = () => {
-    ToastAndroid.showWithGravity(
-      'Gagal, Terjadi Kesalahan Edit Contact',
-      ToastAndroid.SHORT,
-      ToastAndroid.CENTER,
-    );
-  };
   try {
     const id = yield select(state => state.HomeReducer.selectedID);
     const res = yield apiEditContact(action.payload, id);
     console.log(res, '1');
-    if (res.status == 201) {
+    if (res.status < 400) {
       yield put({type: 'GET_CONTACT_BY_ID'});
       yield put({type: 'GET_HOME'});
       navigate('DetailScreen');
       console.log('2');
     } else {
-      TOASTEDITCONTACTFAILED();
+      ToastAndroid.showWithGravity(
+        res.data.message,
+        ToastAndroid.LONG,
+        ToastAndroid.CENTER,
+      );
     }
   } catch (e) {
     console.log('3');
     console.info('e', e);
-    TOASTEDITCONTACTFAILED();
+    ToastAndroid.showWithGravity(
+      res.data.message,
+      ToastAndroid.LONG,
+      ToastAndroid.CENTER,
+    );
   }
 }
 

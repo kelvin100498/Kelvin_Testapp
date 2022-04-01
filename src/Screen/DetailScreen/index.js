@@ -1,13 +1,17 @@
-import {StyleSheet, Text, View, SafeAreaView} from 'react-native';
+import {StyleSheet, View, SafeAreaView} from 'react-native';
 import React, {useEffect} from 'react';
-import Poppins from '../../Component/Poppins/index.js';
 import {useSelector, useDispatch} from 'react-redux';
-import {moderateScale} from 'react-native-size-matters';
-import Entypo from 'react-native-vector-icons/Entypo';
-import COLOR from '../../Config/color.js';
-import ProfileFoto from '../../Component/ProfileFoto/index';
 import OptionsMenu from 'react-native-options-menu';
+import {moderateScale} from 'react-native-size-matters';
+
+//component
+import Poppins from '../../Component/Poppins/index.js';
+import ProfileFoto from '../../Component/ProfileFoto/index';
+
+//helper
 import {navigate} from '../../Helper/navigate';
+import Feather from 'react-native-vector-icons/Feather';
+import COLOR from '../../Config/color.js';
 
 const DetailScreen = () => {
   const dispatch = useDispatch();
@@ -31,11 +35,7 @@ const DetailScreen = () => {
       <View style={styles.Icon}>
         <OptionsMenu
           customButton={
-            <Entypo
-              name="dots-three-horizontal"
-              size={moderateScale(16)}
-              color={COLOR.white}
-            />
+            <Feather name="edit" size={moderateScale(24)} color={COLOR.white} />
           }
           destructiveIndex={1}
           options={['Edit Contact', 'Delete Contact']}
@@ -102,5 +102,7 @@ const styles = StyleSheet.create({
   Icon: {
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
+    marginTop: moderateScale(12),
+    marginRight: moderateScale(22),
   },
 });

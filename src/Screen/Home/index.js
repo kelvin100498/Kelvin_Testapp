@@ -1,14 +1,16 @@
 import {StyleSheet, Text, View, SafeAreaView, ScrollView} from 'react-native';
 import React, {useEffect} from 'react';
-import COLOR from '../../Config/color';
-import Poppins from '../../Component/Poppins/index.js';
 import {moderateScale} from 'react-native-size-matters';
-import CardKontak from '../../Component/CardContact';
-import ButtonPrimary from '../../Component/Button';
-import FloatingButton from '../../Component/FloatingButton';
 import {useDispatch, useSelector} from 'react-redux';
-import {navigate} from '../../Helper/navigate';
+
+//component
+import Poppins from '../../Component/Poppins/index.js';
 import ImageNull from '../../Component/imageNull';
+import CardKontak from '../../Component/CardContact';
+import FloatingButton from '../../Component/FloatingButton';
+
+//helper
+import {navigate} from '../../Helper/navigate';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -21,7 +23,9 @@ const Home = () => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={styles.header}>
-        <Poppins size={24}>My Contact</Poppins>
+        <Poppins fontWeight="bold" size={26}>
+          My Contact
+        </Poppins>
       </View>
       {dataContact.length > 0 ? (
         <ScrollView showsVerticalScrollIndicator={true}>
@@ -50,7 +54,7 @@ export default Home;
 const styles = StyleSheet.create({
   header: {
     alignItems: 'center',
-    marginTop: moderateScale(12),
-    marginBottom: moderateScale(28),
+    marginTop: moderateScale(18),
+    marginBottom: moderateScale(22),
   },
 });

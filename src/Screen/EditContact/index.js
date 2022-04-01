@@ -1,13 +1,16 @@
 import {StyleSheet, View, SafeAreaView, ScrollView} from 'react-native';
 import React, {useState} from 'react';
-import Header from '../../Component/Header/index';
-import {navigate} from '../../Helper/navigate.js';
-import CardTextInput from '../../Component/CardTextInput/index.js';
 import {useSelector, useDispatch} from 'react-redux';
-import ProfileFoto from '../../Component/ProfileFoto/index';
 import {moderateScale} from 'react-native-size-matters';
+
+//component
+import CardTextInput from '../../Component/CardTextInput/index.js';
+import ProfileFoto from '../../Component/ProfileFoto/index';
+import Header from '../../Component/Header/index';
+
+//helper
+import {navigate} from '../../Helper/navigate.js';
 import COLOR from '../../Config/color.js';
-import Poppins from '../../Component/Poppins/index.js';
 
 const EditContact = () => {
   const dispatch = useDispatch();
@@ -46,11 +49,8 @@ const EditContact = () => {
             <ProfileFoto
               borderColor={COLOR.light}
               size="xlarge"
-              source={selectedContactById?.photo}
+              source={selectedContactById.photo}
             />
-            <View style={styles.Button}>
-              <Poppins size={12}>Change Picture</Poppins>
-            </View>
           </View>
           <CardTextInput
             value1={firstName}
@@ -79,12 +79,5 @@ const styles = StyleSheet.create({
     marginTop: moderateScale(32),
     marginBottom: moderateScale(20),
     alignItems: 'center',
-  },
-  Button: {
-    marginTop: moderateScale(12),
-    backgroundColor: COLOR.blackSecond,
-    paddingHorizontal: moderateScale(12),
-    paddingVertical: moderateScale(8),
-    borderRadius: moderateScale(16),
   },
 });

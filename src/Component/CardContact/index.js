@@ -1,10 +1,9 @@
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {moderateScale} from 'react-native-size-matters';
-import COLOR from '../../Config/color';
 import Poppins from '../Poppins/index.js.js';
 import ProfileFoto from '../ProfileFoto';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {navigate} from '../../Helper/navigate';
 
 const CardKontak = ({data, disable}) => {
