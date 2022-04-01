@@ -47,7 +47,7 @@ const CardTextInput = ({
     } else if (value2 && value2.length < 3) {
       setAlertMesage({
         ...alertMessage,
-        LastName: 'Must be at least 3 characters',
+        LastName: 'Must be at least 3 characters !',
       });
     } else if (value2 && value2.length >= 3) {
       setAlertMesage({

@@ -5,15 +5,11 @@ import {moderateScale} from 'react-native-size-matters';
 import Feather from 'react-native-vector-icons/Feather';
 import Entypo from 'react-native-vector-icons/Entypo';
 import COLOR from '../../Config/color.js';
-import {navigate} from '../../Helper/navigate.js';
 
-const Header = ({Submit, HeaderText = 'Add Contact'}) => {
+const Header = ({Submit, HeaderText = 'Add Contact', Cancel}) => {
   return (
     <View style={styles.ContainerLeft}>
-      <TouchableOpacity
-        onPress={() => {
-          navigate('Home');
-        }}>
+      <TouchableOpacity onPress={Cancel}>
         <View>
           <Entypo name="cross" size={28} color={COLOR.red} />
         </View>

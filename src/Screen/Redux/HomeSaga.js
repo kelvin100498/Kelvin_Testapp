@@ -4,9 +4,12 @@ import {
   apiGetAllContact,
   apiGetContactById,
   apiSaveContact,
+  apiDeleteContact,
+  apiEditContact,
 } from '../../Config/api';
 import {navigate} from '../../Helper/navigate';
 
+//Get All Contact Saga
 export function* homeSaga(action) {
   const TOASTFAILEDHOME = () => {
     ToastAndroid.showWithGravity(
@@ -31,6 +34,7 @@ export function* homeSaga(action) {
   }
 }
 
+//Get Contact By Id Saga
 export function* byIdSaga(action) {
   const TOASTFAILEDID = () => {
     ToastAndroid.showWithGravity(
@@ -56,6 +60,7 @@ export function* byIdSaga(action) {
   }
 }
 
+//Save Contact Saga
 export function* addContact(action) {
   const TOASTFAILEDCONTCACT = () => {
     ToastAndroid.showWithGravity(
@@ -81,8 +86,65 @@ export function* addContact(action) {
   }
 }
 
+//Delete Contact Saga
+export function* deleteContact(action) {
+  const TOASTDELETECONTACT = () => {
+    ToastAndroid.showWithGravity(
+      'Gagal, Terjadi Kesalahan delete Contact',
+      ToastAndroid.SHORT,
+      ToastAndroid.CENTER,
+    );
+  };
+  try {
+    const id = yield select(state => state.HomeReducer.selectedID);
+    const res = yield apiDeleteContact(id);
+    console.log(res, '1');
+    if (res.status == 200) {
+      yield put({type: 'GET_HOME'});
+      navigate('Home');
+      console.log('2');
+    } else {
+      TOASTDELETECONTACT();
+    }
+  } catch (e) {
+    console.log('3');
+    console.info('e', e);
+    TOASTDELETECONTACT();
+  }
+}
+
+//Edit Contact Saga
+export function* editContact(action) {
+  const TOASTEDITCONTACTFAILED = () => {
+    ToastAndroid.showWithGravity(
+      'Gagal, Terjadi Kesalahan Edit Contact',
+      ToastAndroid.SHORT,
+      ToastAndroid.CENTER,
+    );
+  };
+  try {
+    const id = yield select(state => state.HomeReducer.selectedID);
+    const res = yield apiEditContact(action.payload, id);
+    console.log(res, '1');
+    if (res.status == 201) {
+      yield put({type: 'GET_CONTACT_BY_ID'});
+      yield put({type: 'GET_HOME'});
+      navigate('DetailScreen');
+      console.log('2');
+    } else {
+      TOASTEDITCONTACTFAILED();
+    }
+  } catch (e) {
+    console.log('3');
+    console.info('e', e);
+    TOASTEDITCONTACTFAILED();
+  }
+}
+
 export function* HomeSaga() {
   yield takeLatest('GET_HOME', homeSaga);
   yield takeLatest('GET_CONTACT_BY_ID', byIdSaga);
   yield takeLatest('POST_ADD_CONTACT', addContact);
+  yield takeLatest('DELETE_CONTACT', deleteContact);
+  yield takeLatest('EDIT_CONTACT', editContact);
 }

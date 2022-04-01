@@ -3,14 +3,24 @@ import React, {useEffect} from 'react';
 import Poppins from '../../Component/Poppins/index.js';
 import {useSelector, useDispatch} from 'react-redux';
 import {moderateScale} from 'react-native-size-matters';
-import Feather from 'react-native-vector-icons/Feather';
+import Entypo from 'react-native-vector-icons/Entypo';
 import COLOR from '../../Config/color.js';
 import ProfileFoto from '../../Component/ProfileFoto/index';
-import Header from '../../Component/Header/index.js';
+import OptionsMenu from 'react-native-options-menu';
+import {navigate} from '../../Helper/navigate';
 
 const DetailScreen = () => {
   const dispatch = useDispatch();
   const {selectedContactById} = useSelector(state => state.HomeReducer);
+
+  const DeleteContact = () => {
+    dispatch({
+      type: 'DELETE_CONTACT',
+    });
+  };
+  const EdiContact = () => {
+    navigate('EditContact');
+  };
 
   useEffect(() => {
     dispatch({type: 'GET_CONTACT_BY_ID'});
@@ -19,7 +29,18 @@ const DetailScreen = () => {
   return (
     <SafeAreaView>
       <View style={styles.Icon}>
-        <Poppins>Ini titik</Poppins>
+        <OptionsMenu
+          customButton={
+            <Entypo
+              name="dots-three-horizontal"
+              size={moderateScale(16)}
+              color={COLOR.white}
+            />
+          }
+          destructiveIndex={1}
+          options={['Edit Contact', 'Delete Contact']}
+          actions={[EdiContact, DeleteContact]}
+        />
       </View>
       <View style={styles.container}>
         <ProfileFoto

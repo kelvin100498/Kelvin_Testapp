@@ -4,6 +4,7 @@ import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import CardTextInput from '../../Component/CardTextInput/index.js';
 import Header from '../../Component/Header/index.js';
+import {navigate} from '../../Helper/navigate.js';
 
 const AddContact = () => {
   const dispatch = useDispatch();
@@ -12,16 +13,15 @@ const AddContact = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [age, setAge] = useState('');
+  const [photo, setphoto] = useState(
+    'https://res.cloudinary.com/ddvobptro/image/upload/v1642494701/siluet_wni7t4.png',
+  );
 
   const [alertMessage, setAlertMesage] = useState({
     firstName: '',
     lastName: '',
     age: '',
   });
-
-  const [photo, setphoto] = useState(
-    'https://res.cloudinary.com/ddvobptro/image/upload/v1642494701/siluet_wni7t4.png',
-  );
 
   const Submit = () => {
     dispatch({
@@ -32,7 +32,12 @@ const AddContact = () => {
 
   return (
     <SafeAreaView>
-      <Header Submit={Submit} />
+      <Header
+        Submit={Submit}
+        Cancel={() => {
+          navigate('Home');
+        }}
+      />
       <CardTextInput
         value1={firstName}
         value2={lastName}

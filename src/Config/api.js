@@ -53,10 +53,10 @@ export const apiDeleteContact = id => {
   });
 };
 
-export const apiEditContact = (id, dataParticipant) => {
+export const apiEditContact = (dataContact, id) => {
   return axios({
     method: 'PUT',
     url: baseUrl + `contact/${id}`,
-    data: dataParticipant,
+    data: dataContact,
   });
 };
